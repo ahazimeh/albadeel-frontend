@@ -81,6 +81,14 @@ export const pokemonApi = createApi({
         };
       },
     }),
+
+    getAlternativeBrand: builder.query<any, any>({
+      query: (body) => {
+        return {
+          url: `getAlternativeBrand?${body}`,
+        };
+      },
+    }),
   }),
 });
 
@@ -98,4 +106,5 @@ export const {
   useLazyGetAlternativeProductsQuery,
   useGetBrandsQuery,
   useGetBrandInfoQuery,
+  useLazyGetAlternativeBrandQuery,
 } = pokemonApi;

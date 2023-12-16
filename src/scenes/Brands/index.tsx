@@ -4,6 +4,7 @@ import DropDownPicker from "react-native-dropdown-picker";
 import {
   useGetBrandInfoQuery,
   useGetBrandsQuery,
+  useLazyGetAlternativeBrandQuery,
   useLazyGetAlternativeIdQuery,
   useLazyGetAlternativeQuery,
 } from "../../store/configureStore";
@@ -52,7 +53,7 @@ export const Brands: React.FC<Props> = () => {
 
   const page = useRef<number>(1);
   const [products, setProducts] = useState([]);
-  const [fetchAlt, { error }] = useLazyGetAlternativeQuery();
+  const [fetchAlt, { error }] = useLazyGetAlternativeBrandQuery();
   const navigation = useNavigation();
   useEffect(() => {
     navigation.setOptions({
@@ -121,7 +122,7 @@ export const Brands: React.FC<Props> = () => {
       return;
     }
     fetchAlt(`page=${1}&id=${id}`).then((res) => {
-      setProducts(res.data?.alternative);
+      setProducts(res.data?.productBrand);
     });
     page.current = 1;
   }, [id]);
@@ -129,15 +130,19 @@ export const Brands: React.FC<Props> = () => {
     if (!brandInfo) {
       return;
     }
-    getAlternativeId("7up").then((res) => {
-      if (res.data.success) {
-        setId(res.data.alternativeId);
-      }
+    fetchAlt(`page=${1}&id=${brandInfo?.brand?.id}`).then((res) => {
+      console.log("--------------------", res);
+      setProducts(res.data?.productBrand);
     });
+    page.current = 1;
+    // getAlternativeId("7up").then((res) => {
+    //   if (res.data.success) {
+    //     setId(res.data.alternativeId);
+    //   }
+    // });
   }, [brandInfo]);
   // const [query, setQuery] = useState("");
   const [showList, setShowList] = useState(false);
-  console.log("ggg", items);
   return (
     <>
       {/* <DropDownPicker
@@ -174,7 +179,6 @@ export const Brands: React.FC<Props> = () => {
           <Autocomplete
             hideResults={!showList || !brand}
             onPressOut={() => {
-              console.log("111");
               setShowList((oldState) => !oldState);
             }}
             data={items}
@@ -183,13 +187,11 @@ export const Brands: React.FC<Props> = () => {
             flatListProps={{
               keyExtractor: (_, idx) => idx,
               renderItem: ({ item }) => {
-                console.log(item);
                 return (
                   <>
                     <Pressable
                       style={{ padding: 4 }}
                       onPress={() => {
-                        console.log("asdasd");
                         setShowList(false);
                         setBrand("");
                         setValue(item.value); // do this after I click a button
@@ -222,19 +224,20 @@ export const Brands: React.FC<Props> = () => {
         contentContainerStyle={{ marginTop: 48 }}
         onEndReached={() => {
           let currentPage = page.current;
-          fetchAlt(`page=${currentPage + 1}&id=${id}`).then((res) => {
-            if (!res.data.alternative?.length) {
-              return;
-            }
-            console.log("bbb", res.data.alternative);
-            setProducts((oldProducts) => {
-              if (currentPage === page.current) {
-                page.current += 1;
-                return [...oldProducts, ...res.data?.alternative];
+          fetchAlt(`page=${currentPage + 1}&id=${brandInfo?.brand?.id}`).then(
+            (res) => {
+              if (!res.data?.productBrand?.length) {
+                return;
               }
-              return oldProducts;
-            });
-          });
+              setProducts((oldProducts) => {
+                if (currentPage === page.current) {
+                  page.current += 1;
+                  return [...oldProducts, ...res.data?.productBrand];
+                }
+                return oldProducts;
+              });
+            }
+          );
         }}
         data={brandInfo?.brand ? products : []}
         // style={{ marginTop: 50 }}

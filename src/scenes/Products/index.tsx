@@ -120,7 +120,6 @@ export const Products: React.FC<Props> = () => {
     }
     console.log("----------", JSON.stringify(id));
     fetchAltProducts(`page=${1}&id=${JSON.stringify(id)}`).then((res) => {
-      console.log("bbbbbbl", res.data.productBrandSearch);
       setProducts(res.data?.productBrandSearch || []);
     });
     page.current = 1;
@@ -172,16 +171,19 @@ export const Products: React.FC<Props> = () => {
               onEndReached={() => {
                 let currentPage = page.current;
 
+                if (!id) {
+                  return;
+                }
                 fetchAltProducts(
                   `page=${currentPage + 1}&id=${JSON.stringify(id)}`
                 ).then((res) => {
-                  if (!res.data.alternative?.length) {
+                  if (!res.data?.productBrandSearch?.length) {
                     return;
                   }
                   setProducts((oldProducts) => {
                     if (currentPage === page.current) {
                       page.current += 1;
-                      return [...oldProducts, ...res.data?.alternative];
+                      return [...oldProducts, ...res.data?.productBrandSearch];
                     }
                     return oldProducts;
                   });
