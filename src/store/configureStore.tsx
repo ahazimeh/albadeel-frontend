@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pokemonApi = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://albadeel.co",
+    baseUrl: "https://d612-94-187-11-175.ngrok-free.app",
   }),
   endpoints: (builder) => ({
     getPokemonByName: builder.query<any, string>({
@@ -33,6 +33,14 @@ export const pokemonApi = createApi({
       query: (body) => {
         return {
           url: `getAlternative?${body}`,
+          method: "GET",
+        };
+      },
+    }),
+    getAlternativeProducts: builder.query<any, any>({
+      query: (body) => {
+        return {
+          url: `getAlternativeProducts?${body}`,
           method: "GET",
         };
       },
@@ -87,6 +95,7 @@ export const {
   useLazyGetProductQuery,
   useLazyGetAlternativeIdQuery,
   useLazyGetBrandQuery,
+  useLazyGetAlternativeProductsQuery,
   useGetBrandsQuery,
   useGetBrandInfoQuery,
 } = pokemonApi;

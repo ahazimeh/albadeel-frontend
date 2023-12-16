@@ -15,6 +15,7 @@ import { Product } from "./Product";
 import {
   useGetAlternativeQuery,
   useLazyGetAlternativeIdQuery,
+  useLazyGetAlternativeProductsQuery,
   useLazyGetAlternativeQuery,
   useLazyGetBrandQuery,
   useLazyGetProductQuery,
@@ -98,8 +99,11 @@ export const Products: React.FC<Props> = () => {
   ]);
   const [products, setProducts] = useState([]);
   const page = useRef<number>(1);
-  const [id, setId] = useState(0);
-  const [fetchAlt, { data, error }] = useLazyGetAlternativeQuery();
+  const [id, setId] = useState<any>(0);
+
+  const [fetchAlt, {}] = useLazyGetAlternativeQuery();
+  const [fetchAltProducts, { data, error }] =
+    useLazyGetAlternativeProductsQuery();
   const [loading, setLoading] = useState(false);
   const [getProduct, { data: data1 }] = useLazyGetProductQuery();
   const [scanFailed, setScanFailed] = useState(false);
@@ -114,8 +118,10 @@ export const Products: React.FC<Props> = () => {
       setProducts([]);
       return;
     }
-    fetchAlt(`page=${1}&id=${id}`).then((res) => {
-      setProducts(res.data?.alternative);
+    console.log("----------", JSON.stringify(id));
+    fetchAltProducts(`page=${1}&id=${JSON.stringify(id)}`).then((res) => {
+      console.log("bbbbbbl", res.data.productBrandSearch);
+      setProducts(res.data?.productBrandSearch || []);
     });
     page.current = 1;
   }, [id]);
@@ -165,11 +171,13 @@ export const Products: React.FC<Props> = () => {
               keyExtractor={(item) => item.id}
               onEndReached={() => {
                 let currentPage = page.current;
-                fetchAlt(`page=${currentPage + 1}&id=${id}`).then((res) => {
+
+                fetchAltProducts(
+                  `page=${currentPage + 1}&id=${JSON.stringify(id)}`
+                ).then((res) => {
                   if (!res.data.alternative?.length) {
                     return;
                   }
-                  console.log("bbb", res.data.alternative);
                   setProducts((oldProducts) => {
                     if (currentPage === page.current) {
                       page.current += 1;
@@ -178,6 +186,21 @@ export const Products: React.FC<Props> = () => {
                     return oldProducts;
                   });
                 });
+
+                // fetchAltProducts(`page=${currentPage + 1}&id=${id}`).then(
+                //   (res) => {
+                //     if (!res.data.alternative?.length) {
+                //       return;
+                //     }
+                //     setProducts((oldProducts) => {
+                //       if (currentPage === page.current) {
+                //         page.current += 1;
+                //         return [...oldProducts, ...res.data?.alternative];
+                //       }
+                //       return oldProducts;
+                //     });
+                //   }
+                // );
               }}
               // f7f2f9
               ListFooterComponent={() => {
@@ -266,14 +289,11 @@ export const Products: React.FC<Props> = () => {
           <>
             <ScanBarcode
               scanBarcodeFn={async (result: any) => {
-                console.log("asdsad", result);
-                // result = "768388065591";
+                result = "3245060501006";
                 try {
-                  console.log("dfdssdfaa1", result);
                   setScan(false);
                   setLoading(true);
                   let product: any = await getProduct(result);
-                  console.log("xxxxxx", product);
                   if (product?.data?.product) {
                     setScannedProduct(product?.data?.product);
                     getBrand(product?.data?.product?.brand).then((res) => {
@@ -283,13 +303,13 @@ export const Products: React.FC<Props> = () => {
                     product = await axios.get(
                       `https://scanbot.io/wp-json/upc/v1/lookup/${result}`
                     );
-                    console.log("Gggggg", product?.data); // product?.data.error
                     setScannedProduct(product?.data?.product);
                     getBrand(product?.data?.product?.brand).then((res) => {
                       setSupports(!!res.data?.brand?.supports);
                     });
                   }
                   setLoading(false);
+                  console.log("hi");
                   if (!product?.data?.product) {
                     setId(0);
                     setProducts([]);
@@ -300,18 +320,38 @@ export const Products: React.FC<Props> = () => {
                     );
                   } else {
                     setScanFailed(false);
+                    console.log("hi1");
                     getAlternativeId(
-                      product?.data?.product.name
-                      // "7up"
+                      // product?.data?.product.name
+                      "7up a"
                     ).then((res) => {
-                      if (res.data.success) {
-                        setId(res.data.alternativeId);
+                      console.log("hi2", res);
+                      if (res.data?.success) {
+                        // setId(res.data.alternativeId);
+                        console.log("-----------------------");
+                        fetchAlt(`page=1&id=${res.data.alternativeId}`).then(
+                          (res) => {
+                            // console.log(
+                            //   "asdasdsadasdasdsadasdas",
+                            //   res.data.brandSearch
+                            // );
+                            let ids: string[] = [];
+                            for (
+                              let i = 0;
+                              i < res.data.brandSearch.length;
+                              i++
+                            ) {
+                              ids.push(res.data.brandSearch[i].id);
+                            }
+                            console.log("asdsadasdsa");
+                            // setId(ids);
+                            setId([13355, 13356]);
+                          }
+                        );
                       }
                     });
                   }
-                } catch (err) {
-                  console.log("ggggg", err);
-                }
+                } catch (err) {}
               }}
             />
           </>
