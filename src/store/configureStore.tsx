@@ -5,7 +5,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pokemonApi = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://d612-94-187-11-175.ngrok-free.app",
+    baseUrl: "https://7912-94-187-9-77.ngrok-free.app",
   }),
   endpoints: (builder) => ({
     getPokemonByName: builder.query<any, string>({

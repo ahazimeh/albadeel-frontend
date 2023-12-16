@@ -15,9 +15,9 @@ export const MainNavigator: React.FC<Props> = () => {
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Products" component={Products} />
         <Stack.Screen name="Brands" component={Brands} />
-        <Stack.Screen name="Register" component={Register} />
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="Home" component={Main} />
       </Stack.Navigator>

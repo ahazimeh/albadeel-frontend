@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   View,
   TextInput,
@@ -9,6 +9,7 @@ import {
   TouchableOpacity,
   ScrollView,
   FlatList,
+  useWindowDimensions,
 } from "react-native";
 
 import { RegisterStyle } from "./styles";
@@ -44,6 +45,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Shadow } from "react-native-shadow-2";
 import { CommonActions } from "@react-navigation/native";
 import Text from "../../components/Text";
+import CountryPicker, { CountryCode } from "react-native-country-picker-modal";
 
 Logs.enableExpoCliLogging();
 
@@ -67,7 +69,7 @@ const Register = ({ navigation }, props) => {
 
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
-  const [country, setCountry] = useState(null);
+  const [country, setCountry] = useState("FR");
   const [city, setCity] = useState(null);
   const [Email, setEmail] = useState(null);
   const [password, setPass] = useState(null);
@@ -138,7 +140,9 @@ const Register = ({ navigation }, props) => {
     // @ts-ignore
     navigation.navigate("Products");
   }, [userSelector]);
+  const { width } = useWindowDimensions();
 
+  const [visible, setVisible] = useState(false);
   useEffect(() => {
     navigation.setOptions({
       headerLeft: null,
@@ -199,7 +203,7 @@ const Register = ({ navigation }, props) => {
       },
     });
   }, []);
-
+  const [countryCode, setCountryCode] = useState<CountryCode>("FR");
   // useEffect(()=>{
   //   if(searchValue === '')
   //     setFilterItem(teamsArray)
@@ -227,7 +231,10 @@ const Register = ({ navigation }, props) => {
   //       setFavoriteDisplay(false)
   //     }
   //   },[responseMessage])
-
+  const onSelect = (country: Country) => {
+    // setCountryCode(country.cca2);
+    setCountry(country.cca2);
+  };
   return (
     <>
       {filterItem === 0 ? (
@@ -336,18 +343,41 @@ const Register = ({ navigation }, props) => {
                     </View>
                     {/* Your location */}
                     <Text style={RegisterStyle.subTitle}>Your Location</Text>
-                    <View style={RegisterStyle.inputInnerDiv}>
-                      <FontAwesomeIcon
+                    <Pressable
+                      style={RegisterStyle.inputInnerDiv}
+                      onPress={() => {
+                        console.log("ASdsad");
+                        setVisible(true);
+                      }}
+                    >
+                      {/* <FontAwesomeIcon
                         icon={faEarthAsia}
                         style={RegisterStyle.icon}
-                      />
-                      <TextInput
+                      /> */}
+                      {/* <TextInput
                         style={RegisterStyle.input}
                         placeholder="Country (optinal)"
                         onChangeText={(text) => setCountry(text)}
                         value={country}
+                      /> */}
+                      <CountryPicker
+                        {...{
+                          countryCode: country,
+                          onSelect,
+                          containerButtonStyle: {
+                            width: width - 80,
+                            padding: 0,
+                            flex: 1,
+                            flexDirection: "row",
+                            alignItems: "center",
+                          },
+                        }}
+                        visible={true}
+                        onClose={() => {
+                          setVisible(false);
+                        }}
                       />
-                    </View>
+                    </Pressable>
                     <View style={RegisterStyle.inputInnerDiv}>
                       <Image source={require("../../../assets/city.png")} />
                       <TextInput
