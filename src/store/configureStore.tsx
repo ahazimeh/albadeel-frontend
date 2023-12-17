@@ -66,9 +66,13 @@ export const pokemonApi = createApi({
       },
     }),
     getAlternativeId: builder.query<any, any>({
-      query: (name) => {
+      query: (body) => {
+        if (body.brand)
+          return {
+            url: `getAlternativeId?text=${body.name}&brand=${body.brand}`,
+          };
         return {
-          url: `getAlternativeId?text=${name}`,
+          url: `getAlternativeId?text=${body.name}`,
         };
       },
     }),

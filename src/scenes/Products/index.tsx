@@ -337,10 +337,13 @@ export const Products: React.FC<Props> = () => {
                     );
                   } else {
                     setScanFailed(false);
-                    console.log("hi1");
+                    console.log(
+                      "hi1111111111111111111111111111111",
+                      scannedProduct?.brand
+                    );
                     getAlternativeId(
                       // product?.data?.product.name
-                      "7up a"
+                      { name: "7up a", brand: scannedProduct?.brand }
                     ).then((res) => {
                       console.log("hi2", res);
                       if (res.data?.success) {
@@ -362,7 +365,7 @@ export const Products: React.FC<Props> = () => {
                             }
                             console.log("asdsadasdsa");
                             // setId(ids);
-                            setId([13355, 13356]);
+                            setId(ids);
                           }
                         );
                       }

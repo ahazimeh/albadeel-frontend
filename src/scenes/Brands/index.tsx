@@ -5,7 +5,6 @@ import {
   useGetBrandInfoQuery,
   useGetBrandsQuery,
   useLazyGetAlternativeBrandQuery,
-  useLazyGetAlternativeIdQuery,
   useLazyGetAlternativeQuery,
 } from "../../store/configureStore";
 import { useDebounce } from "../../../hooks/useDebounce";
@@ -33,7 +32,6 @@ export const Brands: React.FC<Props> = () => {
     { label: "Apple", value: "apple" },
     { label: "Banana", value: "banana" },
   ]);
-  const [getAlternativeId] = useLazyGetAlternativeIdQuery();
   useEffect(() => {
     let itemsD: any = [];
     for (let i = 0; i < data?.brands?.length; i++) {
@@ -135,11 +133,6 @@ export const Brands: React.FC<Props> = () => {
       setProducts(res.data?.productBrand);
     });
     page.current = 1;
-    // getAlternativeId("7up").then((res) => {
-    //   if (res.data.success) {
-    //     setId(res.data.alternativeId);
-    //   }
-    // });
   }, [brandInfo]);
   // const [query, setQuery] = useState("");
   const [showList, setShowList] = useState(false);
