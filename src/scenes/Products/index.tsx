@@ -136,6 +136,21 @@ export const Products: React.FC<Props> = () => {
   const [scan, setScan] = useState(false);
   const [scannedProduct, setScannedProduct] = useState(null);
   const { height } = useWindowDimensions();
+
+  React.useEffect(() => {
+    const backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      () => {
+        // Handle back button press
+        // Return true to prevent default behavior (exit the app)
+        // Return false to allow default behavior (navigate back)
+        setScan(false);
+      }
+    );
+
+    return () => backHandler.remove();
+  }, [navigation]);
+
   return (
     <>
       <View style={{ backgroundColor: Colors.white, flex: 1 }}>
