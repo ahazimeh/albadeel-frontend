@@ -69,7 +69,7 @@ const Register = ({ navigation }, props) => {
 
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
-  const [country, setCountry] = useState("FR");
+  const [country, setCountry] = useState("LB");
   const [city, setCity] = useState(null);
   const [Email, setEmail] = useState(null);
   const [password, setPass] = useState(null);
@@ -112,7 +112,7 @@ const Register = ({ navigation }, props) => {
       })
         .then((res) => {
           console.log("dddd", res);
-          if (res.data.success) navigation.navigate("Products");
+          if (res.data?.success) navigation.navigate("Products");
         })
         .catch((err) => console.log(err));
 
@@ -203,7 +203,7 @@ const Register = ({ navigation }, props) => {
       },
     });
   }, []);
-  const [countryCode, setCountryCode] = useState<CountryCode>("FR");
+  const [countryCode, setCountryCode] = useState<CountryCode>("LB");
   // useEffect(()=>{
   //   if(searchValue === '')
   //     setFilterItem(teamsArray)
@@ -310,37 +310,7 @@ const Register = ({ navigation }, props) => {
                         value={lastName}
                       />
                     </View>
-                    <View style={RegisterStyle.inputInnerDiv}>
-                      <FontAwesomeIcon
-                        icon={faCalendarAlt}
-                        style={RegisterStyle.icon}
-                      />
-                      {/* <DatePicker
-                                modal
-                                open={open}
-                                date={date}
-                                format="DD-MM-YYYY"
-                                confirmBtnText="Confirm"
-                                cancelBtnText="Cancel"
-                                customStyles={{
-                                  dateIcon: {
-                                    display: 'none',
-                                  },
-                                  dateInput: {
-                                    alignItems: "flex-start",
-                                    borderWidth: 0,
-                                    marginLeft: 10
-                                  },
-                                  }}
-                                onConfirm={(date) => {
-                                  setOpen(false)
-                                  setDate(date)
-                                }}
-                                onCancel={() => {
-                                  setOpen(false)
-                                }}
-                              /> */}
-                    </View>
+
                     {/* Your location */}
                     <Text style={RegisterStyle.subTitle}>Your Location</Text>
                     <Pressable
@@ -372,7 +342,7 @@ const Register = ({ navigation }, props) => {
                             alignItems: "center",
                           },
                         }}
-                        visible={true}
+                        visible={false}
                         onClose={() => {
                           setVisible(false);
                         }}

@@ -99,6 +99,7 @@ const Login = ({ navigation }) => {
   const [CheckInputs, setCheckInputs] = useState(false);
   const [Email, setEmail] = useState(null);
   const [Password, setPass] = useState(null);
+  const [loginError, setLoginError] = useState(false);
 
   const handleSubmit = () => {
     //   if(Email !== null && Password !== null ){
@@ -109,7 +110,12 @@ const Login = ({ navigation }) => {
     //   }
     login({ email: Email, password: Password }).then((res) => {
       console.log("dddd", res);
-      if (res?.data.success) navigation.navigate("Products");
+      if (res.data?.success) {
+        setLoginError(false);
+        navigation.navigate("Products");
+        return;
+      }
+      setLoginError(true);
     });
   };
 
@@ -148,7 +154,9 @@ const Login = ({ navigation }) => {
           <View
             style={[
               LoginStyle.inputInnerDiv,
-              CheckInputs && Email === null ? LoginStyle.Redinput : "",
+              (CheckInputs && Email === null) || loginError
+                ? LoginStyle.Redinput
+                : "",
             ]}
           >
             <FontAwesomeIcon icon={faEnvelope} style={LoginStyle.icon} />
@@ -164,7 +172,9 @@ const Login = ({ navigation }) => {
           <View
             style={[
               LoginStyle.inputInnerDiv,
-              CheckInputs && Password === null ? LoginStyle.Redinput : "",
+              (CheckInputs && Password === null) || loginError
+                ? LoginStyle.Redinput
+                : "",
             ]}
           >
             <FontAwesomeIcon icon={faLock} style={LoginStyle.icon} />

@@ -26,13 +26,14 @@ export const counterSlice = createSlice({
     },
     logout: (state, action) => {
       state.success = false;
+      state.token = "";
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
       pokemonApi.endpoints.login.matchFulfilled,
       (state: any, response: any) => {
-        if (response.payload.token) {
+        if (response.payload.success && response.payload.token) {
           state.success = response.payload.success;
           state.token = response.payload.token;
         }
@@ -42,7 +43,7 @@ export const counterSlice = createSlice({
       pokemonApi.endpoints.register.matchFulfilled,
       (state: any, response: any) => {
         console.log("asdsadasda", response.payload.success);
-        if (response.payload.success) {
+        if (response.payload.success && response.payload.token) {
           state.success = response.payload.success;
           state.token = response.payload.token;
         }
