@@ -5,7 +5,19 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pokemonApi = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "https://7912-94-187-9-77.ngrok-free.app",
+    baseUrl: "https://6358-94-187-9-77.ngrok-free.app",
+    prepareHeaders: (headers, { getState }) => {
+      // By default, if we have a token in the store, let's use that for authenticated requests
+      console.log("qwertyuiop", getState() as any);
+      const token = (getState() as any).counter?.token;
+      console.log("999999999999999999999", token);
+
+      if (token) {
+        headers.set("authorization", `Bearer ${token}`);
+      }
+
+      return headers;
+    },
   }),
   endpoints: (builder) => ({
     getPokemonByName: builder.query<any, string>({

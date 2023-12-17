@@ -9,7 +9,7 @@ import { persistReducer } from "redux-persist";
 
 const persistConfig: any = {
   key: "root",
-  version: 2,
+  version: 2.1,
   storage: AsyncStorage,
 };
 

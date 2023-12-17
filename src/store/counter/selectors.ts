@@ -6,3 +6,8 @@ export const selectUserStatus = createSelector(
   [selectSlice],
   (state) => state.success
 );
+
+export const selectUserToken = createSelector(
+  [selectSlice],
+  (state) => state.token
+);

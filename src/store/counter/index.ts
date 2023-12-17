@@ -34,6 +34,7 @@ export const counterSlice = createSlice({
       (state: any, response: any) => {
         if (response.payload.token) {
           state.success = response.payload.success;
+          state.token = response.payload.token;
         }
       }
     );
@@ -43,6 +44,7 @@ export const counterSlice = createSlice({
         console.log("asdsadasda", response.payload.success);
         if (response.payload.success) {
           state.success = response.payload.success;
+          state.token = response.payload.token;
         }
       }
     );
