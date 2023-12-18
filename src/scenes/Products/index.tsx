@@ -337,15 +337,13 @@ export const Products: React.FC<Props> = () => {
                     );
                   } else {
                     setScanFailed(false);
-                    console.log(
-                      "hi1111111111111111111111111111111",
-                      scannedProduct?.brand
-                    );
                     getAlternativeId(
                       // product?.data?.product.name
-                      { name: "7up a", brand: scannedProduct?.brand }
+                      {
+                        name: product?.data?.product?.name,
+                        brand: scannedProduct?.brand,
+                      }
                     ).then((res) => {
-                      console.log("hi2", res);
                       if (res.data?.success) {
                         // setId(res.data.alternativeId);
                         console.log("-----------------------");
