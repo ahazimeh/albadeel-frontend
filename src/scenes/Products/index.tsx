@@ -107,18 +107,12 @@ export const Products: React.FC<Props> = () => {
   const [loading, setLoading] = useState(false);
   const [getProduct, { data: data1 }] = useLazyGetProductQuery();
   const [scanFailed, setScanFailed] = useState(false);
-  // console.log("data", data);
   const dispatch = useDispatch();
-  // useEffect(() => {
-  //   console.log("asdasd");
-  //   dispatch(logout({}));
-  // }, []);
   useEffect(() => {
     if (id === 0) {
       setProducts([]);
       return;
     }
-    console.log("----------", JSON.stringify(id));
     fetchAltProducts(`page=${1}&id=${JSON.stringify(id)}`).then((res) => {
       setProducts(res.data?.productBrandSearch || []);
     });
@@ -326,7 +320,6 @@ export const Products: React.FC<Props> = () => {
                     });
                   }
                   setLoading(false);
-                  console.log("hi");
                   if (!product?.data?.product) {
                     setId(0);
                     setProducts([]);
@@ -346,7 +339,6 @@ export const Products: React.FC<Props> = () => {
                     ).then((res) => {
                       if (res.data?.success) {
                         // setId(res.data.alternativeId);
-                        console.log("-----------------------");
                         fetchAlt(`page=1&id=${res.data.alternativeId}`).then(
                           (res) => {
                             // console.log(
@@ -361,7 +353,6 @@ export const Products: React.FC<Props> = () => {
                             ) {
                               ids.push(res.data.brandSearch[i].id);
                             }
-                            console.log("asdsadasdsa");
                             // setId(ids);
                             setId(ids);
                           }

@@ -8,9 +8,7 @@ export const pokemonApi = createApi({
     baseUrl: "https://albadeel.co",
     prepareHeaders: (headers, { getState }) => {
       // By default, if we have a token in the store, let's use that for authenticated requests
-      console.log("qwertyuiop", getState() as any);
       const token = (getState() as any).counter?.token;
-      console.log("999999999999999999999", token);
 
       if (token) {
         headers.set("authorization", `Bearer ${token}`);

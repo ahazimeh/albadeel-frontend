@@ -27,7 +27,6 @@ export const Brands: React.FC<Props> = () => {
   const [brand, setBrand] = useState("");
   const debounceBrand = useDebounce(brand, 300);
   const { data } = useGetBrandsQuery(debounceBrand, { skip: !debounceBrand });
-  console.log("Asdasdasdas", debounceBrand);
   const { data: brandInfo } = useGetBrandInfoQuery(value, { skip: !value });
   const [items, setItems] = useState([
     { label: "Apple", value: "apple" },
@@ -130,7 +129,6 @@ export const Brands: React.FC<Props> = () => {
       return;
     }
     fetchAlt(`page=${1}&id=${brandInfo?.brand?.id}`).then((res) => {
-      console.log("--------------------", res);
       setProducts(res.data?.productBrand);
     });
     page.current = 1;

@@ -109,7 +109,6 @@ const Login = ({ navigation }) => {
     //     setCheckInputs(true)
     //   }
     login({ email: Email, password: Password }).then((res) => {
-      console.log("dddd", res);
       if (res.data?.success) {
         setLoginError(false);
         navigation.navigate("Products");

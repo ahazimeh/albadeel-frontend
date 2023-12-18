@@ -316,7 +316,6 @@ const Register = ({ navigation }, props) => {
                     <Pressable
                       style={RegisterStyle.inputInnerDiv}
                       onPress={() => {
-                        console.log("ASdsad");
                         setVisible(true);
                       }}
                     >

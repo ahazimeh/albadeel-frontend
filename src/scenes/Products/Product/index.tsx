@@ -34,16 +34,18 @@ export const Product: React.FC<Props> = ({ product }) => {
             }}
           >
             {/* <Text>asdsad</Text> */}
-            <Image
-              style={{
-                flex: 1,
-                borderTopLeftRadius: 3,
-                borderBottomLeftRadius: 3,
-              }}
-              source={{
-                uri: product.imageUrl,
-              }}
-            />
+            {!!product.imageUrl && (
+              <Image
+                style={{
+                  flex: 1,
+                  borderTopLeftRadius: 3,
+                  borderBottomLeftRadius: 3,
+                }}
+                source={{
+                  uri: product.imageUrl,
+                }}
+              />
+            )}
           </View>
           <View style={{ paddingHorizontal: 20, flex: 2 }}>
             <Text
