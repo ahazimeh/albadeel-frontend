@@ -306,7 +306,7 @@ export const Products: React.FC<Props> = () => {
           <>
             <ScanBarcode
               scanBarcodeFn={async (result: any) => {
-                result = "3245060501006";
+                // result = "3245060501006";
                 try {
                   setScan(false);
                   setLoading(true);
