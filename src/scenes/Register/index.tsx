@@ -45,7 +45,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Shadow } from "react-native-shadow-2";
 import { CommonActions } from "@react-navigation/native";
 import Text from "../../components/Text";
-import CountryPicker, { CountryCode } from "react-native-country-picker-modal";
+// import CountryPicker, { CountryCode } from "react-native-country-picker-modal";
 
 Logs.enableExpoCliLogging();
 
@@ -69,7 +69,7 @@ const Register = ({ navigation }, props) => {
 
   const [firstName, setFirstName] = useState(null);
   const [lastName, setLastName] = useState(null);
-  const [country, setCountry] = useState("LB");
+  const [country, setCountry] = useState("");
   const [city, setCity] = useState(null);
   const [Email, setEmail] = useState(null);
   const [password, setPass] = useState(null);
@@ -203,7 +203,7 @@ const Register = ({ navigation }, props) => {
       },
     });
   }, []);
-  const [countryCode, setCountryCode] = useState<CountryCode>("LB");
+  // const [countryCode, setCountryCode] = useState<CountryCode>("LB");
   // useEffect(()=>{
   //   if(searchValue === '')
   //     setFilterItem(teamsArray)
@@ -323,13 +323,13 @@ const Register = ({ navigation }, props) => {
                         icon={faEarthAsia}
                         style={RegisterStyle.icon}
                       /> */}
-                      {/* <TextInput
+                      <TextInput
                         style={RegisterStyle.input}
                         placeholder="Country (optinal)"
                         onChangeText={(text) => setCountry(text)}
                         value={country}
-                      /> */}
-                      <CountryPicker
+                      />
+                      {/* <CountryPicker
                         {...{
                           countryCode: country,
                           onSelect,
@@ -345,7 +345,7 @@ const Register = ({ navigation }, props) => {
                         onClose={() => {
                           setVisible(false);
                         }}
-                      />
+                      /> */}
                     </Pressable>
                     <View style={RegisterStyle.inputInnerDiv}>
                       <Image source={require("../../../assets/city.png")} />
