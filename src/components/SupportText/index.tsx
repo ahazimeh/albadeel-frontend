@@ -25,7 +25,7 @@ export const SupportText: React.FC<Props> = ({ supports, text, style }) => {
       {text}
       <MaterialCommunityIcons
         name={supports ? "close" : "check-circle"}
-        size={20}
+        size={16}
         color={supports ? "red" : Colors.green}
         style={{
           justifyContent: "center",
