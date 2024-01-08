@@ -264,7 +264,8 @@ export const Products: React.FC<Props> = () => {
                         <>
                           <SupportText
                             style={{ marginTop: 8 }}
-                            text={"This brand supports Israel"}
+                            // text={"This brand supports Israel"}
+                            text={"Attention! Please refer to the badeel"}
                             supports={true}
                           />
                         </>
@@ -273,7 +274,8 @@ export const Products: React.FC<Props> = () => {
                           <SupportText
                             style={{ marginTop: 14 }}
                             text={
-                              "There is no info that this brand supports Israel"
+                              // "There is no info that this brand supports Israel"
+                              "You can proceed buying this product"
                             }
                             supports={false}
                           />

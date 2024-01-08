@@ -1,5 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import { FlatList, Pressable, StyleSheet, View } from "react-native";
+import {
+  BackHandler,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  View,
+} from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import {
   useGetBrandInfoQuery,
@@ -53,6 +59,19 @@ export const Brands: React.FC<Props> = () => {
   const [products, setProducts] = useState([]);
   const [fetchAlt, { error }] = useLazyGetAlternativeBrandQuery();
   const navigation = useNavigation();
+  const goBackHandler = () => {
+    navigation.dispatch((state) => ({
+      ...CommonActions.goBack(),
+      target: state.key,
+    }));
+    return true;
+  };
+  useEffect(() => {
+    BackHandler.addEventListener("hardwareBackPress", goBackHandler);
+    return () => {
+      BackHandler.removeEventListener("hardwareBackPress", goBackHandler);
+    };
+  }, []);
   useEffect(() => {
     navigation.setOptions({
       headerLeft: null,
@@ -166,6 +185,7 @@ export const Brands: React.FC<Props> = () => {
             flexDirection: "row",
             alignItems: "flex-start",
             marginTop: 8,
+            marginLeft: 8,
           }}
         >
           <Autocomplete
@@ -240,17 +260,19 @@ export const Brands: React.FC<Props> = () => {
         ListHeaderComponent={() => {
           return (
             <>
-              <View style={{ marginHorizontal: 14 }}>
+              <View style={{ marginHorizontal: 8 }}>
                 {brandInfo?.brand && (
                   <Text style={{ marginTop: 8 }}>
                     {brandInfo?.brand.supports ? (
                       <SupportText
-                        text={`"${brandInfo.brand.name}" supports Israel`}
+                        // text={`"${brandInfo.brand.name}" supports Israel`}
+                        text="Attention! Please refer to the badeel"
                         supports={true}
                       />
                     ) : (
                       <SupportText
-                        text={`"${brandInfo.brand.name}" does not supports Israel`}
+                        // text={`"${brandInfo.brand.name}" does not supports Israel`}
+                        text="You can proceed with this brand"
                         supports={false}
                       />
                     )}
@@ -267,7 +289,7 @@ export const Brands: React.FC<Props> = () => {
                     }}
                   >
                     <SupportText
-                      text="There is no info that this brand supports Israel"
+                      text="You can proceed buying this product"
                       supports={false}
                     />
                   </View>
