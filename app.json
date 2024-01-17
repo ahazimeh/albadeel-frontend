@@ -2,7 +2,7 @@
   "expo": {
     "name": "albadeel",
     "slug": "albadeel-frontend",
-    "version": "4.0.0",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/albadeel-icon.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
       },
       "permissions": ["android.permission.CAMERA"],
       "package": "com.ahazimeh.albadeelfrontend",
-      "versionCode": 4
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
