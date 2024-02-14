@@ -133,7 +133,7 @@ export const Products: React.FC<Props> = () => {
   // }, [data]);
   const [scan, setScan] = useState(false);
   const [scannedProduct, setScannedProduct] = useState(null);
-  const { height } = useWindowDimensions();
+  const { height, width } = useWindowDimensions();
 
   React.useEffect(() => {
     const backHandler = BackHandler.addEventListener(
@@ -311,7 +311,7 @@ export const Products: React.FC<Props> = () => {
               style={{
                 backgroundColor: "white",
                 position: "absolute",
-                width: 360,
+                width: width,
                 marginLeft: 0,
                 bottom: 0,
                 marginBottom: 0,

@@ -6,6 +6,7 @@ import {
   ScrollView,
   StyleSheet,
   View,
+  useWindowDimensions,
 } from "react-native";
 import DropDownPicker from "react-native-dropdown-picker";
 import {
@@ -61,6 +62,7 @@ export const Brands: React.FC<Props> = () => {
   // }, [value]);
   const [id, setId] = useState(0);
 
+  const { height, width } = useWindowDimensions();
   const page = useRef<number>(1);
   const [products, setProducts] = useState([]);
   const [fetchAlt, { error }] = useLazyGetAlternativeBrandQuery();
@@ -326,7 +328,7 @@ export const Brands: React.FC<Props> = () => {
         style={{
           backgroundColor: "white",
           position: "absolute",
-          width: 360,
+          width: width,
           marginLeft: 0,
           bottom: 0,
           marginBottom: 0,
