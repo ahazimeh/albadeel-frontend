@@ -33,10 +33,14 @@ import { Button } from "../../components/Button";
 import { Shadow } from "react-native-shadow-2";
 import Text from "../../components/Text";
 import { SupportText } from "../../components/SupportText";
+import Modal from "react-native-modal";
+import { ProductsDetails } from "./ProductsDetails";
 
 interface Props {}
 
 export const Products: React.FC<Props> = () => {
+  const [visible, setVisible] = useState(false);
+
   const navigation = useNavigation();
   const [support, setSupports] = useState(false);
   const [getBrand] = useLazyGetBrandQuery();
@@ -294,9 +298,54 @@ export const Products: React.FC<Props> = () => {
                 );
               }}
               renderItem={(item) => {
-                return <Product product={item?.item?.product} />;
+                return (
+                  <Product
+                    product={item?.item?.product}
+                    setVisible={setVisible}
+                  />
+                );
               }}
             />
+
+            <Modal
+              style={{
+                backgroundColor: "white",
+                position: "absolute",
+                width: 360,
+                marginLeft: 0,
+                bottom: 0,
+                marginBottom: 0,
+                borderRadius: 20,
+              }}
+              isVisible={!!visible}
+              onBackdropPress={() => {
+                setVisible(false);
+              }}
+            >
+              <ScrollView style={{ flex: 1, paddingBottom: 20 }}>
+                <View
+                  style={{
+                    // borderWidth: 0.7,
+                    flex: 1,
+                  }}
+                >
+                  <View style={{ paddingLeft: 20, flex: 2, paddingRight: 8 }}>
+                    <View>
+                      <Text
+                        style={{
+                          fontSize: 18,
+                          marginVertical: 16,
+                          fontWeight: "600",
+                        }}
+                      >
+                        Albadeel:
+                      </Text>
+                    </View>
+                    <ProductsDetails product={visible} numberOfLines={10} />
+                  </View>
+                </View>
+              </ScrollView>
+            </Modal>
           </>
         ) : (
           <>
