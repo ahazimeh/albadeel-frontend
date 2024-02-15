@@ -53,18 +53,22 @@ export const Product: React.FC<Props> = ({ product, setVisible }) => {
             <View
               style={{
                 // borderRightWidth: 0.7,
-                flex: 1,
+                // flex: 1,
                 borderTopLeftRadius: 3,
                 borderBottomLeftRadius: 3,
+                height: 140,
+                justifyContent: "center",
               }}
             >
               {/* <Text>asdsad</Text> */}
               {!!product.imageUrl && (
                 <Image
                   style={{
-                    flex: 1,
+                    // flex: 1,
                     borderTopLeftRadius: 3,
                     borderBottomLeftRadius: 3,
+                    width: Math.min(width / 3, 140),
+                    aspectRatio: 1,
                   }}
                   source={{
                     uri: product.imageUrl,
@@ -72,7 +76,7 @@ export const Product: React.FC<Props> = ({ product, setVisible }) => {
                 />
               )}
             </View>
-            <View style={{ paddingHorizontal: 20, flex: 2 }}>
+            <View style={{ paddingHorizontal: 20, flex: 1 }}>
               <ProductsDetails product={product} numberOfLines={1} />
             </View>
           </View>

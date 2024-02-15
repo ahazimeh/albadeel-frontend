@@ -1,7 +1,7 @@
 import React from "react";
 import Text from "../../../components/Text";
 import { Colors } from "../../../constants";
-import { StyleSheet } from "react-native";
+import { StyleSheet, View } from "react-native";
 
 interface Props {
   product: any;
@@ -13,7 +13,12 @@ export const ProductsDetails: React.FC<Props> = ({
   numberOfLines,
 }) => {
   return (
-    <>
+    <View
+      style={{
+        justifyContent: "space-evenly",
+        flex: 1,
+      }}
+    >
       <Text
         style={[{ color: Colors.green }, styles.textStyle]}
         numberOfLines={numberOfLines}
@@ -40,7 +45,7 @@ export const ProductsDetails: React.FC<Props> = ({
           {product.manufacturer}
         </Text>
       )}
-    </>
+    </View>
   );
 };
 
