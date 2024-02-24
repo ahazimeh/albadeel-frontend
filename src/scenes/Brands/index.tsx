@@ -193,7 +193,7 @@ export const Brands: React.FC<Props> = () => {
             flexDirection: "row",
             alignItems: "flex-start",
             marginTop: 8,
-            marginLeft: 8,
+            marginHorizontal: 8,
           }}
         >
           <Autocomplete
@@ -224,7 +224,7 @@ export const Brands: React.FC<Props> = () => {
               },
             }}
           />
-          <Button
+          {/* <Button
             style={{ height: 42, padding: 0, width: 42, marginHorizontal: 8 }}
             onPress={() => {
               setValue(brand);
@@ -237,7 +237,7 @@ export const Brands: React.FC<Props> = () => {
               size={20}
               color={Colors.white}
             />
-          </Button>
+          </Button> */}
         </View>
       </View>
       <FlatList
@@ -355,7 +355,7 @@ export const Brands: React.FC<Props> = () => {
                     fontWeight: "600",
                   }}
                 >
-                  Albadeel:
+                  Thebadeel:
                 </Text>
               </View>
               <ProductsDetails product={visible} numberOfLines={10} />

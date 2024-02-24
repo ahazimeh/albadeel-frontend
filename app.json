@@ -2,7 +2,7 @@
   "expo": {
     "name": "TheBadeel",
     "slug": "albadeel",
-    "version": "3.0.0",
+    "version": "4.0.0",
     "orientation": "portrait",
     "icon": "./assets/albadeel-icon.png",
     "userInterfaceStyle": "light",
@@ -28,7 +28,7 @@
       },
       "permissions": ["android.permission.CAMERA"],
       "package": "com.ahazimeh.albadeel",
-      "versionCode": 3
+      "versionCode": 4
     },
     "web": {
       "favicon": "./assets/favicon.png"

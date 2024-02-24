@@ -338,7 +338,7 @@ export const Products: React.FC<Props> = () => {
                           fontWeight: "600",
                         }}
                       >
-                        Albadeel:
+                        Thebadeel:
                       </Text>
                     </View>
                     <ProductsDetails product={visible} numberOfLines={10} />
