@@ -1,8 +1,8 @@
 {
   "expo": {
     "name": "TheBadeel",
-    "slug": "albadeel",
-    "version": "4.0.0",
+    "slug": "thebadeel-frontend",
+    "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/albadeel-icon.png",
     "userInterfaceStyle": "light",
@@ -14,7 +14,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/"],
+    "assetBundlePatterns": [
+      "**/"
+    ],
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
@@ -26,9 +28,11 @@
       "adaptiveIcon": {
         "backgroundColor": "#ffffff"
       },
-      "permissions": ["android.permission.CAMERA"],
-      "package": "com.ahazimeh.albadeel",
-      "versionCode": 4
+      "permissions": [
+        "android.permission.CAMERA"
+      ],
+      "package": "com.ahazimeh.thebadeelfrontend",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -43,7 +47,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "d257f967-3935-499a-93b6-64d059b39e6e"
+        "projectId": "63334d95-9829-4f83-995a-e8fe2316fa73"
       }
     }
   }
