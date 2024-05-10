@@ -21,7 +21,7 @@ import {
   useLazyGetProductQuery,
 } from "../../store/configureStore";
 import { useDispatch } from "react-redux";
-import { logout } from "../../store/counter";
+import { logout } from "../../store/api";
 import { ScanBarcode } from "./ScanBarcode";
 import { ScannedProduct } from "./ScannedProduct";
 import axios from "axios";

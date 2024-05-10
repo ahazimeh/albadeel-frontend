@@ -39,7 +39,7 @@ import axios from "axios";
 import { Logs } from "expo";
 import { useRegisterMutation } from "../../store/configureStore";
 import { useSelector } from "react-redux";
-import { selectUserStatus } from "../../store/counter/selectors";
+import { selectUserStatus } from "../../store/api/selectors";
 import { Colors } from "../../constants";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Shadow } from "react-native-shadow-2";

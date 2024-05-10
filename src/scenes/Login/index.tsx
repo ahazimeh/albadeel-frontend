@@ -22,7 +22,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useLoginMutation } from "../../store/configureStore";
 import { useSelector } from "react-redux";
-import { selectUserStatus } from "../../store/counter/selectors";
+import { selectUserStatus } from "../../store/api/selectors";
 import { Colors } from "../../constants";
 import { Shadow } from "react-native-shadow-2";
 // import Checkbox from 'expo-checkbox';

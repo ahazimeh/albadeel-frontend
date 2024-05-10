@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
 
-const selectSlice = (state: any) => state.counter;
+const selectSlice = (state: any) => state.product;
 
 export const selectUserStatus = createSelector(
   [selectSlice],

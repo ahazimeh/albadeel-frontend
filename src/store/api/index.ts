@@ -7,8 +7,8 @@ const initialState = {
   success: false,
 };
 
-export const counterSlice = createSlice({
-  name: "counter",
+export const productSlice = createSlice({
+  name: "product",
   initialState,
   reducers: {
     increment: (state) => {
@@ -54,6 +54,6 @@ export const counterSlice = createSlice({
 
 // Action creators are generated for each case reducer function
 export const { increment, decrement, incrementByAmount, logout } =
-  counterSlice.actions;
+  productSlice.actions;
 
-export default counterSlice.reducer;
+export default productSlice.reducer;

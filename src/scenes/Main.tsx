@@ -1,14 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { decrement, increment } from "../store/counter";
 import { Button, Pressable, StyleSheet, View } from "react-native";
 import { BarCodeScanner } from "expo-barcode-scanner";
 import Text from "../components/Text";
-// import { decrement, increment } from './counterSlice'
 
 export default function Main() {
-  const count = useSelector((state) => state.counter.value);
-  const dispatch = useDispatch();
   //   return (
   //     <>
   //       <Text>asd</Text>

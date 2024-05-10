@@ -2,7 +2,7 @@ import { combineReducers, configureStore } from "@reduxjs/toolkit";
 // Or from '@reduxjs/toolkit/query/react'
 import { setupListeners } from "@reduxjs/toolkit/query";
 import { pokemonApi } from "./configureStore";
-import counterReducer from "../store/counter";
+import productReducer from "./api";
 import storage from "redux-persist/lib/storage";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { persistReducer } from "redux-persist";
@@ -15,7 +15,7 @@ const persistConfig: any = {
 
 const reducer = combineReducers({
   [pokemonApi.reducerPath]: pokemonApi.reducer,
-  counter: counterReducer,
+  product: productReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);

@@ -5,7 +5,7 @@ import { pokemonApi } from "./configureStore";
 import { persistReducer } from "redux-persist";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import storage from "redux-persist/lib/storage";
-import counterReducer from "../store/counter";
+import productReducer from "./api";
 
 const persistConfig: any = {
   key: "root",
@@ -15,7 +15,7 @@ const persistConfig: any = {
 
 const reducer = combineReducers({
   [pokemonApi.reducerPath]: pokemonApi.reducer,
-  counter: counterReducer,
+  product: productReducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, reducer);
