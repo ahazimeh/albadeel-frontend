@@ -151,7 +151,7 @@ export const RegisterStyle = StyleSheet.create({
     margin: 12,
     padding: 10,
     backgroundColor: "#E6E6E6",
-    width: "50%",
+    // width: "50%",
     marginLeft: 0,
     width: "90%",
   },
