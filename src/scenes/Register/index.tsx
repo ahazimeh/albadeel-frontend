@@ -325,7 +325,7 @@ const Register = ({ navigation }, props) => {
                       /> */}
                       <TextInput
                         style={RegisterStyle.input}
-                        placeholder="Country (optinal)"
+                        placeholder="Country (optional)"
                         onChangeText={(text) => setCountry(text)}
                         value={country}
                       />
